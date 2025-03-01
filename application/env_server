@@ -1,0 +1,8 @@
+# Database Configuration
+DB_HOSTNAME="localhost"
+DB_USERNAME="aprimatu_yusron"
+DB_PASSWORD="Askl1290!@#"
+DB_DATABASE="aprimatu_april"
+DB_DRIVER="mysqli"
+
+BASE_URL = "https://april.aprima-tugasakhir.my.id/"
