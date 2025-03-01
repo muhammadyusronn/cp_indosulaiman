@@ -7,10 +7,22 @@ $route['dash']                          = 'backend/HomeController/index';
 $route['admin']                         = 'backend/AdminController/index';
 $route['admin/create']                  = 'backend/AdminController/create';
 $route['admin/update/(:num)']           = 'backend/AdminController/edit/$1';
-// Routing Admin
+// Routing Level User
 $route['level']                         = 'backend/LevelController/index';
 $route['level/create']                  = 'backend/LevelController/create';
 $route['level/update/(:num)']           = 'backend/LevelController/edit/$1';
+// Routing Jenis Konten
+$route['jenis-konten']                  = 'backend/JenisKontenController/index';
+$route['jenis-konten/create']           = 'backend/JenisKontenController/create';
+$route['jenis-konten/update/(:num)']    = 'backend/JenisKontenController/edit/$1';
+// Routing Konten
+$route['konten']                         = 'backend/KontenController/index';
+$route['konten/create']                  = 'backend/KontenController/create';
+$route['konten/update/(:num)']           = 'backend/KontenController/edit/$1';
+// Routing artikel
+$route['artikel']                         = 'backend/ArtikelController/index';
+$route['artikel/create']                  = 'backend/ArtikelController/create';
+$route['artikel/update/(:num)']           = 'backend/ArtikelController/edit/$1';
 // Routing Produk
 $route['product']                         = 'backend/ProductController/index';
 $route['product/create']                  = 'backend/ProductController/create';

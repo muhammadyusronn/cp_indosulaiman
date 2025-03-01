@@ -42,7 +42,7 @@ function rupiah($angka){
     </style>
     <!-- PAGE LEVEL STYLES-->
     <!-- TinyMCE CDN -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/h1zw54ub7syl89f1z0812m1btp3ktda4hm9ibxlb4unu1je3/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
     tinymce.init({

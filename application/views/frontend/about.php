@@ -23,17 +23,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h3 class="column-title">PT Indo Sulaiman Makmur</h3>
-                <p>KAMI ADALAH PERUSAHAAN YANG BERGERAK DI BIDANG LEMBAGA PELATIHAN KERJA, JASA HUKUM DAN KETENAGAKERJAAN, RENOVASI, BANGUNAN RUMAH, GEDUNG INTERIOR, DAN SUPLIER ALAT TULIS KANTOR, DAN ALAT PEMADAM API RINGAN (APAR)</p>
-                <blockquote>
-                    <p>Menjadi pusat pelatihan kerja yang unggul dalam meningkatkan kemampuan dan keterampilan tenaga kerja sehingga mereka dapat berkontribusi pada pembangunan ekonomi dan sosial di indonesia</p>
-                </blockquote>
+                <?php
+                if (count($data) > 0) { ?>
+                    <?= $data[0]->isi ?>
+                <?php }
+                ?>
             </div><!-- Col end -->
 
             <div class="col-lg-6 mt-5 mt-lg-0">
 
-                <img class="img-fluid" style="max-width: 350px;" src="<?= base_url('assets/frontend/images/logo.jpg') ?>">
-
+                <img class="img-responsive" style="max-width: 350px;" src="<?= base_url() ?>uploads/file-konten/<?= isset($data) ? $data[0]->file : "Undefined" ?>" alt="File Not Found">
             </div><!-- Col end -->
         </div><!-- Content row end -->
 

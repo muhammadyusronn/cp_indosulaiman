@@ -67,7 +67,9 @@ class KontenController extends MY_Controller
         if (isset($_POST['submit'])) {
             $this->db->trans_start();
             $datas = [];
-                if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
+                if (is_uploaded_file($_FILES['file_foto']['tmp_name'])) {
+                    
+                echo 'otw';
                     $directory = 'file-konten';
                     $path = './uploads/' . $directory;
                     if (!file_exists($path)) {
@@ -79,6 +81,7 @@ class KontenController extends MY_Controller
                     $this->load->library('upload', $config);
                     if (!$this->upload->do_upload('file_foto')) {
                         $error = array('error' => $this->upload->display_errors());
+                        $this->dump($error);exit;
                         $this->flashmsg('Gagal upload data', 'danger');
                         redirect('konten');
                         die();
@@ -86,6 +89,7 @@ class KontenController extends MY_Controller
                     $dataFile = $this->upload->data();
                     $datas = array_merge($datas, ['file' => $dataFile['file_name']]);
                 }
+
                 $data = [
                 'jenis_konten' => $this->POST('jenis_konten'),
                 'judul' => $this->POST('judul'),

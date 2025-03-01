@@ -32,7 +32,7 @@
                     </tfoot>
                     <tbody>
                         <?php
-                        $default = [1, 2];
+                        $default = [1, 2, 3];
                         foreach ($level as $i) : ?>
                             <tr>
                                 <td><?= $i->nama_level; ?></td>
