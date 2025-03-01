@@ -42,7 +42,7 @@ $route['about-page']                    = 'frontend/AboutController/index';
 $route['visi-page']                     = 'frontend/VisiController/index';
 
 $route['project-page']                  = 'frontend/ProjectController/index';
-$route['cart-add']                      = 'frontend/CartController/insert_cart';
+$route['register-page']                 = 'frontend/RegisterController/index';
 $route['cart-delete']                   = 'frontend/CartController/delete_cart';
 $route['invoice']                       = 'frontend/CartController/generate_invoice';
 
