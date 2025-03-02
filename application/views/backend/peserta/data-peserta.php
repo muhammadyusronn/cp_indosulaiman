@@ -36,39 +36,47 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Tanggal Transaksi</th>
-                            <th>No. Meja</th>
-                            <th>No. Hp</th>
-                            <th>Nama Pembeli</th>
-                            <th>Total</th>
-                            <th>Metode Bayar</th>
-                            <th>Status Pembayaran</th>
-                            <th>Status Order</th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Nomor Handphone</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Usia</th>
+                            <th>Tinggi Badan</th>
+                            <th>Pendidikan Terakhir</th>
+                            <th>Sumber Informasi</th>
+                            <th>Alamat</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($transaction as $i) : ?>
+                        foreach ($peserta as $i) : 
+                        $no=1;
+                        ?>
                             <tr>
-                                <td>NO</td>
-                                <td><?= date("d/m/Y", strtotime($i->created_date)); ?></td>
-                                <td><?= $i->nomor_meja ?></td>
-                                <td><?= $i->nomor_hp ?></td>
-                                <td><?= $i->nama_pembeli ?></td>
-                                <td><?= rupiah($i->total) ?></td>
-                                <td><?= $i->metode ?></td>
-                                <td><?= ($i->is_lunas == '1') ? '<a class="btn btn-xs btn-success text-white">LUNAS</a>' : '<a class="btn btn-sm btn-danger text-white">BELUM BAYAR</a>' ?></td>
-                                <td><?= $i->nama_status ?></td>
+                                <td><?= $no++; ?></td>
+                                <td><?= $i->nik ?></td>
+                                <td><?= $i->nama ?></td>
+                                <td><?= $i->email ?></td>
+                                <td><?= $i->no_hp ?></td>
+                                <td><?= $i->tempat_lahir ?></td>
+                                <td><?= $i->tanggal_lahir ?></td>
+                                <td><?= $i->usia ?></td>
+                                <td><?= $i->tinggi_badan ?></td>
+                                <td><?= $i->pendidikan_terakhir ?></td>
+                                <td><?= $i->sumber_informasi ?></td>
+                                <td><?= $i->alamat ?></td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-info btn-xs dropdown-toggle" title="ACTION" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-list"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="<?= base_url('transaction-delete?id=') . $i->id_transaksi ?>" onclick="return confirm('Are you sure?')">DELETE</a>
-                                            <a class="dropdown-item" href="<?= base_url('transaction-detail?id_transaksi=') . $i->id_transaksi ?>">DETAIL</a>
-                                            <a class="dropdown-item" href="<?= base_url('invoice?id_transaksi=') . $i->id_transaksi ?>" target="_blank">INVOICE</a>
+                                            <a class="dropdown-item" href="<?= base_url('transaction-delete?id=') . $i->id ?>" onclick="return confirm('Are you sure?')">DELETE</a>
+                                            <a class="dropdown-item" href="<?= base_url('transaction-detail?id_transaksi=') . $i->id ?>">DETAIL</a>
+                                            <a class="dropdown-item" href="<?= base_url('invoice?id_transaksi=') . $i->id ?>" target="_blank">INVOICE</a>
                                         </div>
                                     </div>
                                 </td>
@@ -78,14 +86,17 @@
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>Tanggal Transaksi</th>
-                            <th>No. Meja</th>
-                            <th>No. Hp</th>
-                            <th>Nama Pembeli</th>
-                            <th>Total</th>
-                            <th>Metode Bayar</th>
-                            <th>Status Pembayaran</th>
-                            <th>Status Order</th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Nomor Handphone</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Usia</th>
+                            <th>Tinggi Badan</th>
+                            <th>Pendidikan Terakhir</th>
+                            <th>Sumber Informasi</th>
+                            <th>Alamat</th>
                             <th></th>
                         </tr>
                     </tfoot>

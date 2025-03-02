@@ -28,7 +28,7 @@ $route['product']                         = 'backend/ProductController/index';
 $route['product/create']                  = 'backend/ProductController/create';
 $route['product/update/(:num)']           = 'backend/ProductController/edit/$1';
 // Routing Transcation
-$route['transaction']                     = 'backend/TransactionController/index';
+$route['peserta']                         = 'backend/PesertaController/index';
 $route['transaction/paid']                = 'backend/TransactionController/paid';
 $route['transaction-detail']              = 'backend/TransactionController/getById';
 $route['transaction-update']              = 'backend/TransactionController/update';
@@ -43,6 +43,8 @@ $route['visi-page']                     = 'frontend/VisiController/index';
 
 $route['project-page']                  = 'frontend/ProjectController/index';
 $route['register-page']                 = 'frontend/RegisterController/index';
+$route['register']                      = 'frontend/RegisterController/submit';
+
 $route['cart-delete']                   = 'frontend/CartController/delete_cart';
 $route['invoice']                       = 'frontend/CartController/generate_invoice';
 

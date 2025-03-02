@@ -118,18 +118,18 @@ function rupiah($angka){
                                 <span class="nav-label">Level User</span>
                             </a>
                         </li>
-                    <li>
+                    <!-- <li>
                         <a class="active" href="<?= base_url('jenis-konten') ?>"><i
                                 class="sidebar-item-icon fa fa-book"></i>
                             <span class="nav-label">Jenis Konten</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a class="active" href="<?= base_url('admin') ?>"><i class="sidebar-item-icon fa fa-user"></i>
                             <span class="nav-label">User</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a class="active" href="<?= base_url('galeri') ?>"><i class="sidebar-item-icon fa fa-photo"></i>
                             <span class="nav-label">Galeri</span>
                         </a>
@@ -139,14 +139,14 @@ function rupiah($angka){
                                 class="sidebar-item-icon fa fa-address-card-o"></i>
                             <span class="nav-label">Konten Website</span>
                         </a>
-                    </li>
+                    </li> -->
                     <?php } ?>
                     <?php if ($this->data['token']['level'] == '1' || $this->data['token']['level'] == '3') { ?>
                     <li class="heading">Transaksi</li>
                     <li>
-                        <a class="active" href="<?= base_url('transaction') ?>"><i
+                        <a class="active" href="<?= base_url('peserta') ?>"><i
                                 class="sidebar-item-icon fa fa-address-card-o"></i>
-                            <span class="nav-label">Transaksi</span>
+                            <span class="nav-label">Peserta</span>
                         </a>
                     </li>
                     <?php } ?>

@@ -231,4 +231,17 @@ class MY_Controller extends CI_Controller
         return $images;
         
     }
+
+    protected function array_validasi(){
+        $arr = array(
+            'required' => 'Data %s tidak boleh kosong',
+            'min_length' => '%s minimal berisi 16 karater',
+            'max_length' => '%s maksimal berisi 16 karater',
+            'valid_email' => 'Mohon masukan %s yang valid',
+            'validate_date' => 'Mohon masukkan %s yang valid',
+            'numeric' => 'Mohon masukkan %s yang valid'
+        );
+
+        return $arr;
+    }
 }
