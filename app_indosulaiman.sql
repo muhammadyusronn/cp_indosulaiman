@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 02 Mar 2025 pada 18.14
+-- Waktu pembuatan: 05 Mar 2025 pada 16.31
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -254,7 +254,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `nama`, `kontak`, `password`, `last_login`, `level_user`, `original_pass`) VALUES
-(1, 'admin', 'Admin', '081299929922', '$2y$10$i6LAb9xDh4G.pgVZ.cGknOUtRiPvK5SAW8SeMvAnICqKvnejunsQS', '2025-03-02 10:49:55', 1, ''),
+(1, 'admin', 'Admin', '081299929922', '$2y$10$i6LAb9xDh4G.pgVZ.cGknOUtRiPvK5SAW8SeMvAnICqKvnejunsQS', '2025-03-05 09:28:34', 1, ''),
 (2, 'user', 'user', '082189299222', '$2y$10$bMYspn86xs5Syrp9uclhu.WnCGUm9ZOhq2QBKaS8fWZGsxQro3aoW', '2025-03-01 09:23:44', 2, ''),
 (3, 'publisher', 'publisher', '0812829922', '$2y$10$ixcBcvIlqaoLalUMpCwoDOzDjvXifp4zBR//Dsrrf7ISiG/kmg5dK', '2025-03-01 09:24:00', 3, '33333');
 
