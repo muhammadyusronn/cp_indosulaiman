@@ -126,7 +126,7 @@
                       </div>
                     </li>
                     <li class="header-get-a-quote">
-                      <a class="btn btn-primary" href="https://forms.gle/GrgH4nNc2kDo4Bks6" target="_blank">REGISTER</a>
+                      <a class="btn btn-primary" href="<?= base_url('register-page') ?>" target="_blank">REGISTER</a>
                     </li>
                   </ul>
                   <!-- Ul end -->
@@ -228,6 +228,9 @@
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">FAQ</a>
+                      </li>
+                      <li class="nav-item">
+                      <a class="nav-link" href="<?= base_url('login') ?>">Login</a>
                       </li>
                     </ul>
                   </div>
