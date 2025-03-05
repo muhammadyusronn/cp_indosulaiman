@@ -1,8 +1,8 @@
 # Database Configuration
 DB_HOSTNAME="localhost"
-DB_USERNAME="aprimatu_yusron"
-DB_PASSWORD="Askl1290!@#"
-DB_DATABASE="aprimatu_april"
+DB_USERNAME="indosula_user"
+DB_PASSWORD="12qwasZX!@#"
+DB_DATABASE="indosula_apps"
 DB_DRIVER="mysqli"
 
-BASE_URL = "https://april.aprima-tugasakhir.my.id/"
+BASE_URL = "https://indosulaimanmakmur.com/"
