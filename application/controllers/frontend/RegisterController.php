@@ -25,7 +25,7 @@ class RegisterController extends MY_Controller
         $this->form_validation->set_rules(
             'nik',
             'Nomor Induk Kependudukan',
-            'required|min_length[16]|max_length[16]',
+            'required|min_length[16]|max_length[16]|callback_check_unique_nik',
             $this->array_validasi()
         );
         $this->form_validation->set_rules(
@@ -90,8 +90,8 @@ class RegisterController extends MY_Controller
         );
 
         if ($this->form_validation->run() == FALSE) {
-            // Validation failed, reload the form
-            echo validation_errors();
+            $this->flashmsg(validation_errors(), 'danger');
+				redirect('register-page');
         } else {
             // Validation passed, process the registration (e.g., save to the database)
             $this->dump($_POST);
@@ -114,12 +114,20 @@ class RegisterController extends MY_Controller
             ]);
             $this->db->trans_complete();
             if ($this->db->trans_status() === FALSE) {
-                $this->flashmsg('Gagal menambah data', 'danger');
-                redirect('jenis-konten');
+                $this->flashmsg('Gagal menambah data. Mohon input data dengan benar!', 'danger');
+                redirect('register-page');
             } else {
-                $this->flashmsg('Sukses menambah data', 'success');
-                redirect('jenis-konten');
+                $this->flashmsg('Selamat data anda sudah berhasil didaftartkan. Silahkan tunggu konfirmasi melalu whatsapp oleh admin.', 'success');
+				redirect('register-page');
             }
         }
+    }
+
+    public function check_unique_nik($nik) {
+        if ($this->PesertaModel->is_nik_registered($nik)) {
+            $this->form_validation->set_message('check_unique_nik', '{field} sudah terdaftar. SIlahkan kontak administrator untuk menyelesaikan pendaftaran');
+            return FALSE;
+        }
+        return TRUE;
     }
 }

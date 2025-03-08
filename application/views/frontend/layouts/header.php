@@ -113,7 +113,10 @@
                       <div class="info-box">
                         <div class="info-box-content">
                           <p class="info-box-title">Call Us</p>
-                          <p class="info-box-subtitle">0812-9890-5289</p>
+                          <p class="info-box-subtitle">
+                            <a href="https://wa.me/6287777888995" target="_blank" class="btn btn-xs btn-info"> Rangga</a>
+                            <a href="https://wa.me/6283897374605" target="_blank" class="btn btn-xs btn-info"> Farhan</a>
+                          </p>
                         </div>
                       </div>
                     </li>

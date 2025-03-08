@@ -37,6 +37,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Register</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Email</th>
@@ -58,6 +59,7 @@
                             ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
+                                    <td><?= $i->registered_at ?></td>
                                     <td><?= $i->nik ?></td>
                                     <td><?= $i->nama ?></td>
                                     <td><?= $i->email ?></td>
@@ -75,9 +77,7 @@
                                                 <i class="fa fa-list"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="<?= base_url('transaction-delete?id=') . $i->id ?>" onclick="return confirm('Are you sure?')">DELETE</a>
-                                                <a class="dropdown-item" href="<?= base_url('transaction-detail?id_transaksi=') . $i->id ?>">DETAIL</a>
-                                                <a class="dropdown-item" href="<?= base_url('invoice?id_transaksi=') . $i->id ?>" target="_blank">INVOICE</a>
+                                                <a class="dropdown-item" href="https://wa.me/<?= $i->no_hp; ?>" target="_blank">CHAT PESERTA</a>
                                             </div>
                                         </div>
                                     </td>
@@ -87,6 +87,7 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
+                                <th>Register</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Email</th>
