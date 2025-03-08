@@ -1,35 +1,78 @@
 <?php
 class MY_Controller extends CI_Controller
 {
-    function rupiah($angka){
+    function rupiah($angka)
+    {
         $hasil_rupiah = number_format($angka, 0, ".", ".");
         return $hasil_rupiah;
     }
 
-    protected function sendingemail($to, $subject, $message)
-    {
-        $config = [
-            'mailtype'   => 'text',
-            'charset'    => 'iso-8859-1',
-            'protocol'   => 'smptp',
-            'smptp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user'  => 'testingemailcodeku@gmail.com',
-            'smtp_pass'  => '123yusron,./',
-            'smtp_port'  => 465
+    function generate_verification_code($length = 6) {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code = '';
+        for ($i = 0; $i < $length; $i++) {
+            $code .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $code;
+    }
 
-        ];
+    function generate_secure_password($length = 12) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+';
+        $password = '';
+        $max = strlen($characters) - 1;
+    
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $characters[random_int(0, $max)];
+        }
+    
+        return $password;
+    }
+
+    function encrypt_url($string) {
+        $CI = &get_instance();
+        $CI->load->library('encryption');
+        return strtr(base64_encode($CI->encryption->encrypt($string)), '+/=', '-_,');
+    }
+
+    function decrypt_url($encrypted_string) {
+        $CI = &get_instance();
+        $CI->load->library('encryption');
+        return $CI->encryption->decrypt(base64_decode(strtr($encrypted_string, '-_,', '+/=')));
+    }
+
+    protected function sendingemailregistration($to, $subject, $message)
+    {
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'mail.indosulaimanmakmur.com'; // Replace with your SMTP server
+        $config['smtp_user'] = 'rekrutmen@indosulaimanmakmur.com';  // Your domain email
+        $config['smtp_pass'] = 'Asklzxnm1290!@#';        // Use App Password if needed
+        $config['smtp_port'] = 587;                   // 465 for SSL, 587 for TLS
+        $config['mailtype'] = 'html';                 // Use 'text' for plain text emails
+        $config['charset'] = 'utf-8';
+        $config['newline'] = "\r\n";
+        $config['wordwrap'] = TRUE;
+        $config['smtp_crypto'] = 'tls'; // Gunakan 'ssl' jika port 465
+        $config['smtp_crypto'] = ''; // Coba kosongkan jika tetap error
+        $config['smtp_timeout'] = 30;
+        $config['smtp_debug'] = 2; // Untuk debugging (opsional)
+        $config['validate'] = false; // Nonaktifkan validasi SMTP
+        $config['smtp_auto_tls'] = false; // Hindari TLS otomatis
+        $config['smtp_ssl_verify_peer'] = false;
+        $config['smtp_ssl_verify_peer_name'] = false;
+        $config['smtp_ssl_verify_host'] = false;
         $this->load->library('email', $config);
         $this->email->initialize($config);
 
-        $this->email->from('testingemailcodeku@gmail.com');
+        $this->email->from('rekrutmen@indosulaimanmakmur.com');
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
         $send = $this->email->send();
+        // Send email and return status
         if ($send) {
-            echo 'success';
+            return ['status' => true, 'message' => 'Email sent successfully.'];
         } else {
-            show_error($this->email->print_debugger());
+            return ['status' => false, 'message' => $CI->email->print_debugger()];
         }
     }
 
@@ -103,16 +146,16 @@ class MY_Controller extends CI_Controller
         curl_close($curlHandle);
     }
 
-    protected function send_wa($to,$name,$url)
+    protected function send_wa($to, $name, $url)
     {
-        $message ='
+        $message = '
                 
-        Hi '.$name.',
+        Hi ' . $name . ',
         
         I hope you’re well. Thank you for choosing Kopi Andung!
         This an invoice for your order.
         
-        You can check the invoice in this link : '.$url.'
+        You can check the invoice in this link : ' . $url . '
         
         Don’t hesitate to reach out if you have any questions.
 
@@ -154,6 +197,10 @@ class MY_Controller extends CI_Controller
     protected function POST($name)
     {
         return $this->input->post($name);
+    }
+    protected function GET($name)
+    {
+        return $this->input->get($name);
     }
     protected function dump($var)
     {
@@ -198,41 +245,43 @@ class MY_Controller extends CI_Controller
                   </div>');
     }
 
-    protected function multipleUpload($path,$files){
+    protected function multipleUpload($path, $files)
+    {
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
         $config = array(
             'upload_path'   => $path,
             'allowed_types' => 'jpg|gif|png|jpeg',
-            'overwrite'     => 1,                       
-            'max_size'     => 100000,                       
+            'overwrite'     => 1,
+            'max_size'     => 100000,
         );
         $this->load->library('upload', $config);
 
         $images = array();
         // $files=$_FILES['foto'];
         foreach ($files['name'] as $key => $image) {
-            $_FILES['images[]']['name']= $files['name'][$key];
-            $_FILES['images[]']['type']= $files['type'][$key];
-            $_FILES['images[]']['tmp_name']= $files['tmp_name'][$key];
-            $_FILES['images[]']['error']= $files['error'][$key];
-            $_FILES['images[]']['size']= $files['size'][$key];
+            $_FILES['images[]']['name'] = $files['name'][$key];
+            $_FILES['images[]']['type'] = $files['type'][$key];
+            $_FILES['images[]']['tmp_name'] = $files['tmp_name'][$key];
+            $_FILES['images[]']['error'] = $files['error'][$key];
+            $_FILES['images[]']['size'] = $files['size'][$key];
 
             if ($this->upload->do_upload('images[]')) {
                 $uploaded = $this->upload->data();
                 array_push($images, $uploaded['file_name']);
             } else {
                 $error = array('error' => $this->upload->display_errors());
-                $this->dump($error);exit;
+                $this->dump($error);
+                exit;
             }
         }
 
         return $images;
-        
     }
 
-    protected function array_validasi(){
+    protected function array_validasi()
+    {
         $arr = array(
             'required' => 'Data %s tidak boleh kosong',
             'min_length' => '%s minimal berisi 16 karater',

@@ -44,6 +44,8 @@ $route['visi-page']                     = 'frontend/VisiController/index';
 $route['project-page']                  = 'frontend/ProjectController/index';
 $route['register-page']                 = 'frontend/RegisterController/index';
 $route['register']                      = 'frontend/RegisterController/submit';
+$route['verifikasi']                    = 'frontend/RegisterController/email_verification';
+$route['submit_verifikasi']             = 'frontend/RegisterController/submit_email_verification';
 
 $route['cart-delete']                   = 'frontend/CartController/delete_cart';
 $route['invoice']                       = 'frontend/CartController/generate_invoice';
