@@ -60,7 +60,8 @@
           </span>
           <div class="ts-service-box-content">
             <h4>Call Us</h4>
-            <p>0812-9890-5289</p>
+            <p>+62 87777888995 - Rangga</p>
+            <p>+62 83897374605 - Farhan</p>
           </div>
         </div>
       </div><!-- Col 3 end -->

@@ -8,6 +8,12 @@ class PesertaModel extends MY_Model
         $this->data['primary_key'] = 'id';
     }
 
+    public function is_nik_registered($nik) {
+        $this->db->where('nik', $nik);
+        $query = $this->db->get('peserta');
+        return $query->num_rows() > 0; // Return true if username exists
+    }
+
     public function get_data_peserta()
     {
         $this->db->select('pst.*, obSI.object_text as sumber_informasi, obPT.object_text as pendidikan_terakhir');

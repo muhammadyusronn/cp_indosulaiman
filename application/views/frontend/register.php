@@ -28,6 +28,7 @@
                 <form id="contact-form" action="<?= base_url('register') ?>" method="post" role="form">
                     <div class="error-container"></div>
                     <div class="alert alert-info">Plase fill this form with a valid data!</div>
+                    <?php echo $this->session->flashdata('msg');?>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
