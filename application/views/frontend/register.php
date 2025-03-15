@@ -90,25 +90,25 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Tempat Lahir</label>
+                                <label>Tempat Lahir <span class="text-danger">*</span></label>
                                 <input class="form-control form-control-subject" name="tempat_lahir" id="tempat_lahir" placeholder="" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Tanggal Lahir</label>
+                                <label>Tanggal Lahir <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control form-control-subject" name="tanggal_lahir" id="tanggal_lahir" placeholder="" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Usia</label>
+                                <label>Usia <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control form-control-subject" name="usia" id="usia" placeholder="" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Tinggi Badan</label>
+                                <label>Tinggi Badan <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control form-control-subject" name="tinggi_badan" id="tinggi_badan" placeholder="" required>
                             </div>
                         </div>
