@@ -1,0 +1,8 @@
+# Database Configuration
+DB_HOSTNAME="localhost"
+DB_USERNAME="indosula_user"
+DB_PASSWORD="12qwasZX!@#"
+DB_DATABASE="indosula_indosula_dev"
+DB_DRIVER="mysqli"
+
+BASE_URL = "https://indosulaimanmakmur.com/"
