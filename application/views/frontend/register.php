@@ -138,7 +138,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Alamat</label>
+                                <label>Alamat  <span class="text-danger">*</span></label>
                                 <textarea class="form-control form-control-message" name="alamat" id="alamat" placeholder="" rows="5"
                                     required></textarea>
                             </div>
