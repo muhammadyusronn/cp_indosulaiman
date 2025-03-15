@@ -13,13 +13,17 @@ class RegisterController extends MY_Controller
         $data['title'] = 'Register';
         $data['active'] = 'register';
         $data['pendidikan_terakhir'] = $this->ObjectModel->get(['object_type' => '1']);
+        $data['pendidikan_terakhir'] = $this->ObjectModel->get(['object_type' => '1']);
         $data['sumber_informasi'] = $this->ObjectModel->get(['object_type' => '2']);
+        $data['agama'] = $this->ObjectModel->get(['object_type' => '3']);
         $this->renderpage('frontend/register', $data);
     }
 
     public function submit()
     {
+        $file_uploaded = [];
         $this->load->library('form_validation');
+
         // Set validation rules
         $this->form_validation->set_rules(
             'nik',
@@ -36,6 +40,24 @@ class RegisterController extends MY_Controller
         $this->form_validation->set_rules(
             'nama',
             'Nama',
+            'required',
+            $this->array_validasi()
+        );
+        $this->form_validation->set_rules(
+            'agama',
+            'Agama',
+            'required',
+            $this->array_validasi()
+        );
+        $this->form_validation->set_rules(
+            'jenis_kelamin',
+            'Jenis Kelamin',
+            'required',
+            $this->array_validasi()
+        );
+        $this->form_validation->set_rules(
+            'sosial_media',
+            'Sosial Media',
             'required',
             $this->array_validasi()
         );
@@ -91,12 +113,98 @@ class RegisterController extends MY_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->flashmsg(validation_errors(), 'danger');
             redirect('register-page');
+            exit;
         } else {
+            $result = $this->do_upload('file_ktp', "peserta/" . $this->POST("nik"), "jpg|png|jpeg|pdf");
+            if ($result['status'] === 'success') {
+                $data["file_ktp"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File KTP : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
+
+            $result = $this->do_upload('file_pas_foto', "peserta/" . $this->POST("nik"), "jpg|png|jpeg");
+            if ($result['status'] === 'success') {
+                $data["file_pas_foto"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File Pas Foto : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
+
+            $result = $this->do_upload('file_ijazah_terakhir', "peserta/" . $this->POST("nik"), "pdf");
+            if ($result['status'] === 'success') {
+                $data["file_ijazah_terakhir"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File Ijazah Terakhir : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
+
+            $result = $this->do_upload('file_cv', "peserta/" . $this->POST("nik"), "pdf");
+            if ($result['status'] === 'success') {
+                $data["file_cv"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File CV : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
+
+
+            // Check if a file is selected
+            if (!empty($_FILES['file_skck']['name'])) {
+                $result = $this->do_upload('file_skck', "peserta/" . $this->POST("nik"), "pdf");
+                if ($result['status'] === 'success') {
+                    $data["file_skck"] = $result["file_name"];
+                } else {
+                    $this->flashmsg('File SKCK : ' . $result['message'], 'danger');
+                    redirect('register-page');
+                    exit;
+                }
+            }
+
+
+            $result = $this->do_upload('file_npwp', "peserta/" . $this->POST("nik"), "pdf");
+            if ($result['status'] === 'success') {
+                $data["file_npwp"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File NPWP : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
+
+            $result = $this->do_upload('file_kis', "peserta/" . $this->POST("nik"), "pdf");
+            if ($result['status'] === 'success') {
+                $data["file_kis"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File KIS : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
+
+            $result = $this->do_upload('file_bpjs', "peserta/" . $this->POST("nik"), "pdf");
+            if ($result['status'] === 'success') {
+                $data["file_bpjs"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File BPJS : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
+
+            $result = $this->do_upload('file_kk', "peserta/" . $this->POST("nik"), "pdf");
+            if ($result['status'] === 'success') {
+                $data["file_kk"] = $result["file_name"];
+            } else {
+                $this->flashmsg('File Kartu Keluarga : ' . $result['message'], 'danger');
+                redirect('register-page');
+                exit;
+            }
             // Validation passed, process the registration (e.g., save to the database)
             $verification_code = $this->generate_verification_code(6);
 
             $this->db->trans_start();
-            $this->PesertaModel->insert([
+            $inserted_data =[
                 'nama' => $this->POST('nama'),
                 'nik' => $this->POST('nik'),
                 'no_hp' => $this->POST('whatsapp'),
@@ -108,22 +216,42 @@ class RegisterController extends MY_Controller
                 'sumber_informasi' => $this->POST('sumber_informasi'),
                 'alamat' => $this->POST('alamat'),
                 'email' => $this->POST('email'),
+                'jenis_kelamin' => $this->POST('jenis_kelamin'),
+                'agama' => $this->POST('agama'),
+                'sosial_media' => $this->POST('sosial_media'),
                 'kode_verifikasi' => $verification_code,
-            ]);
+                'file_ktp' => $data['file_ktp'],
+                'file_pas_foto' => $data['file_pas_foto'],
+                'file_ijazah_terakhir' => $data['file_ijazah_terakhir'],
+                'file_cv' => $data['file_cv'],
+                'file_npwp' => $data['file_npwp'],
+                'file_kis' => $data['file_kis'],
+                'file_bpjs' => $data['file_kis'],
+                'file_kk' => $data['file_kk'],
+            ];
+
+            if (!empty($_FILES['file_skck']['name'])){
+                $inserted_data = array_merge($inserted_data, [
+                    'file_skck' => $data['file_skck']
+                ]);
+            };
+
+            $this->PesertaModel->insert($inserted_data);
             $this->db->trans_complete();
             if ($this->db->trans_status() === FALSE) {
                 $this->flashmsg('Gagal menambah data. Mohon input data dengan benar!', 'danger');
                 redirect('register-page');
             } else {
-
+                $data = $this->POST('nama') . "&" . $this->POST('nik') . "&" . $this->POST('email') . "&" . $verification_code;
+                $encrypted = $this->encrypt_url($data);
                 $message = "
                 Halo " . $this->POST('nama') . ", <br/>
                 Kode verifikasi registrasi anda adalah <strong>" . $verification_code . "</strong> Mohon lakukan input kode verifikasi dengan benar untuk menyelesaikan proses pendaftaran.
+                Anda dapat melakukan verifikasi di link berikut ini <a class='btn btn-xs btn-primary' href='" . base_url('verifikasi?token=' . $encrypted) . "'>VERIFIKASI</a>
                 ";
                 $this->sendingemailregistration($this->POST('email'), 'Registrasi LPK PT Indo Sulaiman Makmur', $message);
 
-                $data = $this->POST('nama') . "&" . $this->POST('nik') . "&" . $this->POST('email') . "&" . $verification_code;
-                $encrypted = $this->encrypt_url($data);
+
                 $this->flashmsg('Selamat data anda sudah berhasil didaftartkan. Silahkan lakukan konfirmasi dengan cara input kode verifikasi yang diterima dari email!', 'success');
                 redirect('verifikasi?token=' . $encrypted);
             }
@@ -166,7 +294,8 @@ class RegisterController extends MY_Controller
             $this->db->trans_start();
             $this->db->where('nik', $this->POST('nik'));
             $this->db->update('peserta', [
-                'kode_verifikasi' => $this->POST('kode_verifikasi')
+                'kode_verifikasi' => $this->POST('kode_verifikasi'),
+                'is_verified' => 1,
             ]);
             $this->db->trans_complete();
             if ($this->db->trans_status() === FALSE) {

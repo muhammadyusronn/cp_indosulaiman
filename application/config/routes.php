@@ -29,6 +29,8 @@ $route['product/create']                  = 'backend/ProductController/create';
 $route['product/update/(:num)']           = 'backend/ProductController/edit/$1';
 // Routing Transcation
 $route['peserta']                         = 'backend/PesertaController/index';
+$route['peserta/detail']                  = 'backend/PesertaController/detail';
+$route['peserta/hapus']                   = 'backend/PesertaController/drop';
 $route['transaction/paid']                = 'backend/TransactionController/paid';
 $route['transaction-detail']              = 'backend/TransactionController/getById';
 $route['transaction-update']              = 'backend/TransactionController/update';

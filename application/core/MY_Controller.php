@@ -7,7 +7,8 @@ class MY_Controller extends CI_Controller
         return $hasil_rupiah;
     }
 
-    function generate_verification_code($length = 6) {
+    function generate_verification_code($length = 6)
+    {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = '';
         for ($i = 0; $i < $length; $i++) {
@@ -16,25 +17,28 @@ class MY_Controller extends CI_Controller
         return $code;
     }
 
-    function generate_secure_password($length = 12) {
+    function generate_secure_password($length = 12)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+';
         $password = '';
         $max = strlen($characters) - 1;
-    
+
         for ($i = 0; $i < $length; $i++) {
             $password .= $characters[random_int(0, $max)];
         }
-    
+
         return $password;
     }
 
-    function encrypt_url($string) {
+    function encrypt_url($string)
+    {
         $CI = &get_instance();
         $CI->load->library('encryption');
         return strtr(base64_encode($CI->encryption->encrypt($string)), '+/=', '-_,');
     }
 
-    function decrypt_url($encrypted_string) {
+    function decrypt_url($encrypted_string)
+    {
         $CI = &get_instance();
         $CI->load->library('encryption');
         return $CI->encryption->decrypt(base64_decode(strtr($encrypted_string, '-_,', '+/=')));
@@ -76,24 +80,65 @@ class MY_Controller extends CI_Controller
         }
     }
 
-    public function do_upload($directory = null)
+    public function do_upload($input_field = "", $directory = "", $allowed_types = '', $file_size = 2048, $encrypted_name = TRUE)
     {
-        $path = APPPATH . 'upload/' . $directory;
+        // Define upload directory path
+        $path = './uploads/'.$directory;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
-        $config['upload_path']          = $path;
-        $config['allowed_types']        = 'pdf';
-        $config['max_size']             = 10000;
+
+        // Define custom error messages
+        $error_messages = [
+            'upload_no_file_selected'   => 'Mohon untuk upload file {field}.',
+            'upload_invalid_filetype'   => 'Tipe file dari {field} tidak diizinkan. Silakan upload file yang valid.',
+            'upload_invalid_filesize'   => 'Ukuran file {field} terlalu besar. Maksimum size yang diizinkan {max_size} KB.',
+            'upload_file_exceeds_limit' => 'File {field} melebihi ukuran maksimum yang diperbolehkan.',
+            'upload_file_partial'       => 'File {field} hanya terupload sebagian.',
+            'upload_no_temp_directory'  => 'Direktori sementara untuk menyimpan file {field} tidak tersedia.',
+            'upload_unable_to_write_file' => 'Tidak dapat menyimpan file {field} ke disk.',
+            'upload_stopped_by_extension' => 'Upload file {field} dihentikan karena ekstensi yang tidak diperbolehkan.',
+        ];
+
+        // Set upload configuration
+        $config = [
+            'upload_path'   => $path,
+            'allowed_types' => $allowed_types,
+            'max_size'      => $file_size, // 2MB
+            'encrypt_name'  => $encrypted_name, // Randomize file name for security
+        ];
+
+        // Load the upload library
         $this->load->library('upload', $config);
-        if (!$this->upload->do_upload('userfile')) {
-            $error = array('error' => $this->upload->display_errors());
 
-            $this->load->view('upload_form', $error);
+        if (!$this->upload->do_upload($input_field)) {
+            // Get default error message
+            $default_error = strip_tags($this->upload->display_errors()); // Remove <p> tags
+
+            // Try to match the error with a custom message
+            $custom_error = $default_error; // Default to original message
+            foreach ($error_messages as $key => $message) {
+                if (stripos($default_error, str_replace('_', ' ', $key)) !== false) {
+                    $custom_error = str_replace(
+                        ['{field}', '{max_size}'],
+                        [$input_field, $file_size],
+                        $message
+                    );
+                    break;
+                }
+            }
+
+            return [
+                'status'  => 'error',
+                'message' => $custom_error, // Use the custom error message
+            ];
         } else {
-            $data = array('upload_data' => $this->upload->data());
-
-            $this->load->view('upload_success', $data);
+            $upload_data = $this->upload->data();
+            return [
+                'status'    => 'success',
+                'file_name' => $upload_data['file_name'],
+                'file_path' => base_url('upload/' . $directory . '/' . $upload_data['file_name']),
+            ];
         }
     }
 

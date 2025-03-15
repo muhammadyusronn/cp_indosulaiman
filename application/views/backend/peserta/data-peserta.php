@@ -16,8 +16,8 @@
                 <div class="ibox-title"><?= $title ?></div>
             </div>
             <div class="ibox-body">
-                <p class="form-inline mx-sm-3 mb-2">Transaction Date</p>
-                <form class="form-inline mb-4" method="GET" action="<?= base_url('transaction') ?>">
+                <p class="form-inline mx-sm-3 mb-2">Tanggal Mendaftar</p>
+                <form class="form-inline mb-4" method="GET" action="<?= base_url('peserta') ?>">
                     <div class="form-group mx-sm-3 mb-2">
                         <input type="date" value="<?= (isset($_GET['start_date'])) ? $_GET['start_date'] : date('Y-m-d'); ?>" class="form-control" id="start_date" name="start_date" placeholder="Start Date">
                     </div>
@@ -27,7 +27,7 @@
                     <div class="input-group">
                         <input type="submit" value="SEARCH" class="btn btn-primary mb-2">
                         <?php if (isset($_GET['start_date'])) { ?>
-                            <a class="btn btn-success mb-2 ml-2" title="REFRESH" href="<?= base_url('transaction') ?>"><i class="fa fa-refresh"></i></a>
+                            <a class="btn btn-success mb-2 ml-2" title="REFRESH" href="<?= base_url('peserta') ?>"><i class="fa fa-refresh"></i></a>
                         <?php } ?>
                     </div>
 
@@ -38,6 +38,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Register</th>
+                                <th>Foto</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Email</th>
@@ -60,6 +61,7 @@
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><?= $i->registered_at ?></td>
+                                    <td><img src="<?= base_url('uploads/peserta/'.$i->nik."/".$i->file_pas_foto) ?>" class="img-fluid rounded" alt="Pas Foto"></td>
                                     <td><?= $i->nik ?></td>
                                     <td><?= $i->nama ?></td>
                                     <td><?= $i->email ?></td>
@@ -77,6 +79,8 @@
                                                 <i class="fa fa-list"></i>
                                             </button>
                                             <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="<?= base_url('peserta/detail?act=detail&id='.$i->id) ?>" target="_blank">DETAIL</a>
+                                            <a class="dropdown-item" href="<?= base_url('peserta/hapus?id='.$i->id) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini? Data yang dihapus tidak bisa dibatalkan')">HAPUS</a>
                                                 <a class="dropdown-item" href="https://wa.me/<?= $i->no_hp; ?>" target="_blank">CHAT PESERTA</a>
                                             </div>
                                         </div>
@@ -88,6 +92,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Register</th>
+                                <th>Foto</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Email</th>

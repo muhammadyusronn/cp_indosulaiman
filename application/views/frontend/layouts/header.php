@@ -116,6 +116,7 @@
                           <p class="info-box-subtitle">
                             <a href="https://wa.me/6287777888995" target="_blank" class="btn btn-xs btn-info"> Rangga</a>
                             <a href="https://wa.me/6283897374605" target="_blank" class="btn btn-xs btn-info"> Farhan</a>
+                            <a href="https://wa.me/6285161215898" target="_blank" class="btn btn-xs btn-info"> Henry</a>
                           </p>
                         </div>
                       </div>
