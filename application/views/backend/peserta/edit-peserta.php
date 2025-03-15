@@ -20,7 +20,7 @@
             <div class="ibox-body">
                 <form class="form-horizontal" id="form-admin" novalidate="novalidate">
                     <div class="form-group row">
-                        <img src="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : '' ?>" class="img-fluid rounded ml-8" style="max-width: 4cm;" alt="Product 1">
+                        <img src="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : '' ?>" class="img-fluid rounded ml-8" style="max-width: 4cm;" alt="Pas Foto">
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Nama</label>
@@ -113,33 +113,49 @@
                         <tr>
                             <td>Kartu Tanda Penduduk</td>
                             <td>
-                                <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_ktp) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php if (isset($peserta) && $peserta[0]->file_ktp != '') { ?>
+                                    <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_ktp) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php } else { ?>
+                                    <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>Kartu Keluarga</td>
                             <td>
-                                <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_kk) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php if (isset($peserta) && $peserta[0]->file_kk != '') { ?>
+                                    <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_kk) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php } else { ?>
+                                    <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>Ijazah Terakhir</td>
                             <td>
-                                <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_ijazah_terakhir) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php if (isset($peserta) && $peserta[0]->file_ijazah_terakhir != '') { ?>
+                                    <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_ijazah_terakhir) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php } else { ?>
+                                    <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>CV</td>
                             <td>
-                                <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_cv) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php if (isset($peserta) && $peserta[0]->file_cv != '') { ?>
+                                    <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_cv) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php } else { ?>
+                                    <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>SKCK</td>
                             <td>
-                                <?php if(isset($peserta) && $peserta[0]->file_skck!= ""){ ?>
+                                <?php if (isset($peserta) && $peserta[0]->file_skck != "") { ?>
                                     <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_skck) : '' ?>" target="_blank">DONWLOAD</a>
-                                <?php }else{ ?> 
+                                <?php } else { ?>
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
                                 <?php } ?>
                             </td>
@@ -147,19 +163,31 @@
                         <tr>
                             <td>NPWP</td>
                             <td>
-                                <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_npwp) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php if (isset($peserta) && $peserta[0]->file_npwp != '') { ?>
+                                    <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_npwp) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php } else { ?>
+                                    <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>KIS</td>
                             <td>
-                                <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_kis) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php if (isset($peserta) && $peserta[0]->file_kis != '') { ?>
+                                    <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_kis) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php } else { ?>
+                                    <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>BPJS</td>
                             <td>
-                                <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_bpjs) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php if (isset($peserta) && $peserta[0]->file_bpjs != '') { ?>
+                                    <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_bpjs) : '' ?>" target="_blank">DONWLOAD</a>
+                                <?php } else { ?>
+                                    <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
                             </td>
                         </tr>
                     </tbody>
