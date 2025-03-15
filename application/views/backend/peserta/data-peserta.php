@@ -61,7 +61,7 @@
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><?= $i->registered_at ?></td>
-                                    <td><img src="<?= base_url('uploads/peserta/'.$i->nik."/".$i->file_pas_foto) ?>" class="img-fluid rounded" alt="Pas Foto"></td>
+                                    <td><img src="<?= (isset($peserta) &&  $peserta[0]->file_pas_foto!='') ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : base_url('assets/img/no-img.png') ?>" class="img-fluid rounded" alt="Pas Foto"></td>
                                     <td><?= $i->nik ?></td>
                                     <td><?= $i->nama ?></td>
                                     <td><?= $i->email ?></td>

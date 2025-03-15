@@ -31,6 +31,7 @@ $route['product/update/(:num)']           = 'backend/ProductController/edit/$1';
 $route['peserta']                         = 'backend/PesertaController/index';
 $route['peserta/detail']                  = 'backend/PesertaController/detail';
 $route['peserta/hapus']                   = 'backend/PesertaController/drop';
+$route['peserta/edit-dokumen']            = 'backend/PesertaController/uploaddokumen';
 $route['transaction/paid']                = 'backend/TransactionController/paid';
 $route['transaction-detail']              = 'backend/TransactionController/getById';
 $route['transaction-update']              = 'backend/TransactionController/update';

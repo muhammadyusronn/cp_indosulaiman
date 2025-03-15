@@ -18,9 +18,10 @@
                 </div>
             </div>
             <div class="ibox-body">
+                <?php echo $this->session->flashdata('msg'); ?>
                 <form class="form-horizontal" id="form-admin" novalidate="novalidate">
                     <div class="form-group row">
-                        <img src="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : '' ?>" class="img-fluid rounded ml-8" style="max-width: 4cm;" alt="Pas Foto">
+                        <img src="<?= (isset($peserta) &&  $peserta[0]->file_pas_foto!='') ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : base_url('assets/img/no-img.png') ?>" class="img-fluid rounded ml-8" style="max-width: 4cm;" alt="Pas Foto">
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Nama</label>
@@ -93,7 +94,6 @@
         </div>
     </div>
     <div class="page-content fade-in-up">
-        <?php echo $this->session->flashdata('msg'); ?>
         <div class="ibox">
             <div class="ibox-head">
                 <div class="ibox-title">Dokumen Peserta</div>
@@ -107,6 +107,7 @@
                         <tr>
                             <th>Jenis Dokumen</th>
                             <th>Dokumen</th>
+                            <th>Act</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,6 +120,18 @@
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
                                 <?php } ?>
                             </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="ktp">
+                                        EDIT
+                                    </button>
+                                <?php } ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Kartu Keluarga</td>
@@ -127,6 +140,18 @@
                                     <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_kk) : '' ?>" target="_blank">DONWLOAD</a>
                                 <?php } else { ?>
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="kk">
+                                        EDIT
+                                    </button>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -139,6 +164,18 @@
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
                                 <?php } ?>
                             </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="ijazah">
+                                        EDIT
+                                    </button>
+                                <?php } ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>CV</td>
@@ -147,6 +184,18 @@
                                     <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_cv) : '' ?>" target="_blank">DONWLOAD</a>
                                 <?php } else { ?>
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="cv">
+                                        EDIT
+                                    </button>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -159,6 +208,18 @@
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
                                 <?php } ?>
                             </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="skck">
+                                        EDIT
+                                    </button>
+                                <?php } ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>NPWP</td>
@@ -167,6 +228,18 @@
                                     <a class="btn btn-xs btn-info" href="<?= isset($peserta) ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_npwp) : '' ?>" target="_blank">DONWLOAD</a>
                                 <?php } else { ?>
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="npwp">
+                                        EDIT
+                                    </button>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -179,6 +252,18 @@
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
                                 <?php } ?>
                             </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="kis">
+                                        EDIT
+                                    </button>
+                                <?php } ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>BPJS</td>
@@ -189,9 +274,113 @@
                                     <span class="btn btn-xs btn-danger">NO FILE UPLOADED</span>
                                 <?php } ?>
                             </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="bpjs">
+                                        EDIT
+                                    </button>
+                                <?php } ?>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">EDIT DOKUMEN</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="<?= base_url('peserta/edit-dokumen') ?>" id="form-admin" novalidate="novalidate" enctype="multipart/form-data" method="post">
+                        <input type="hidden" class="form-control" name="id" id="id" readonly>
+                        <input type="hidden" class="form-control" name="file_type" id="file_type" readonly>
+                        <input type="hidden" class="form-control" name="nik" id="nik" readonly>
+                        <div class="form-group form-modal div-ktp row">
+                            <label class="col-sm-2 col-form-label">File KTP</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_ktp">
+                            </div>
+                        </div>
+                        <div class="form-group form-modal div-kk row">
+                            <label class="col-sm-2 col-form-label">File KK</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_kk">
+                            </div>
+                        </div>
+                        <div class="form-group form-modal div-ijazah row">
+                            <label class="col-sm-2 col-form-label">Ijazah Terakhir</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_ijazah_terakhir" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-modal div-cv row">
+                            <label class="col-sm-2 col-form-label">File CV</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_cv" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-modal div-skck row">
+                            <label class="col-sm-2 col-form-label">File SKCK</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_skck" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-modal div-npwp file-npwp row">
+                            <label class="col-sm-2 col-form-label">File NPWP</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_npwp" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-modal div-kis file-kis row">
+                            <label class="col-sm-2 col-form-label">File KIS</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_kis" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-modal div-bpjs file-bpjs row">
+                            <label class="col-sm-2 col-form-label">File BPJS</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_bpjs" required>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-right"><br>
+                            <button class="btn btn-primary solid blank" type="submit">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // A $( document ).ready() block.
+        $(document).ready(function() {
+            $('#exampleModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var id = button.data('id'); // Get the ID from data-id attribute
+                var file_type = button.data('filetype'); // Get the ID from data-id attribute
+                var nik = button.data('nik'); // Get the ID from data-id attribute
+                $("#file_type").val(file_type)
+                $("#nik").val(nik)
+                $("#id").val(id)
+
+                // Hide all file upload fields first
+                $('.form-modal').hide();
+
+                // Show only the corresponding file upload field
+                $('.div-' + file_type).show();
+            });
+        });
+    </script>
