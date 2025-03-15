@@ -1,5 +1,5 @@
 <footer class="page-footer">
-    <div class="font-13">2022 © <b>Cyber Lab Sriwijaya</b></div>
+    <div class="font-13">2025 © <b>PT Indo Sulaiman Makmur</b></div>
     <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
 </footer>
 </div>
