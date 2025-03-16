@@ -32,10 +32,8 @@ $route['peserta']                         = 'backend/PesertaController/index';
 $route['peserta/detail']                  = 'backend/PesertaController/detail';
 $route['peserta/hapus']                   = 'backend/PesertaController/drop';
 $route['peserta/edit-dokumen']            = 'backend/PesertaController/uploaddokumen';
-$route['transaction/paid']                = 'backend/TransactionController/paid';
-$route['transaction-detail']              = 'backend/TransactionController/getById';
-$route['transaction-update']              = 'backend/TransactionController/update';
-$route['transaction-delete']              = 'backend/TransactionController/drop';
+$route['peserta/edit/submit']             = 'backend/PesertaController/edit';
+$route['peserta/resendemail']             = 'backend/PesertaController/resendemailverification';
 
 // ----------------------------------------------------------------------------------
 

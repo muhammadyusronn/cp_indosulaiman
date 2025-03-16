@@ -19,76 +19,145 @@
             </div>
             <div class="ibox-body">
                 <?php echo $this->session->flashdata('msg'); ?>
-                <form class="form-horizontal" id="form-admin" novalidate="novalidate">
+                <form id="contact-form" action="<?= base_url('peserta/edit/submit') ?>" method="post" role="form">
                     <div class="form-group row">
-                        <img src="<?= (isset($peserta) &&  $peserta[0]->file_pas_foto!='') ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : base_url('assets/img/no-img.png') ?>" class="img-fluid rounded ml-8" style="max-width: 4cm;" alt="Pas Foto">
+                        <img src="<?= (isset($peserta) &&  $peserta[0]->file_pas_foto != '') ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : base_url('assets/img/no-img.png') ?>" class="img-fluid rounded ml-8" style="max-width: 4cm;" alt="Pas Foto">
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->nama : '' ?>" name="nama" disabled>
+                        <input class="form-control" type="hidden" value="<?= isset($peserta) ? $peserta[0]->id : '' ?>" name="id" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
+                        <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->nama : '' ?>" name="nama" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                        <div class="col-sm-10">
+                            <?php if ($_GET['act'] == "detail") { ?>
+                                <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->jenis_kelamin : '' ?>" name="jenis_kelamin" readonly>
+                            <?php } else { ?>
+                                <select class="form-control form-control-subject" name="jenis_kelamin" id="jenis_kelamin" placeholder="" required>
+                                    <option value="Laki-laki" <?= ($peserta[0]->jenis_kelamin=="Laki-laki") ? 'selected' : '' ?>>Laki-laki</option>
+                                    <option value="Perempuan" <?= ($peserta[0]->jenis_kelamin=="Perempuan") ? 'selected' : '' ?>>Perempuan</option>
+                                </select>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Agama</label>
+                        <div class="col-sm-10">
+                            <?php if ($_GET['act'] == "detail") { ?>
+                                <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->agama_text : '' ?>" name="agama" readonly>
+                            <?php } else { ?>
+                                <select class="form-control form-control-subject" name="agama" id="agama" placeholder="" required>
+                                    <?php foreach ($agama as $i): ?>
+                                        <option value="<?= $i->id ?>" <?= ($i->id==$peserta[0]->agama)?'selected':'' ?> ><?= $i->object_text ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">NIK</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->nik : '' ?>" name="nik" disabled>
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->nik : '' ?>" name="nik" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->email : '' ?>" name="email" disabled>
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->email : '' ?>" name="email" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Nomor Handphone</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->no_hp : '' ?>" name="no_hp" disabled>
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->no_hp : '' ?>" name="whatsapp" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->tempat_lahir : '' ?>" name="tempat_lahir" disabled>
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->tempat_lahir : '' ?>" name="tempat_lahir" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->tanggal_lahir : '' ?>" name="tanggal_lahir" disabled>
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->tanggal_lahir : '' ?>" name="tanggal_lahir" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Usia</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="number" value="<?= isset($peserta) ? $peserta[0]->usia : '' ?>" name="usia" disabled>
+                            <input class="form-control" type="number" value="<?= isset($peserta) ? $peserta[0]->usia : '' ?>" name="usia" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tinggi Badan</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="number" value="<?= isset($peserta) ? $peserta[0]->tinggi_badan : '' ?>" name="tinggi_badan" disabled>
+                            <input class="form-control" type="number" value="<?= isset($peserta) ? $peserta[0]->tinggi_badan : '' ?>" name="tinggi_badan" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Pendidikan Terakhir</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->pendidikan_terakhir : '' ?>" name="pendidikan_terakhir" disabled>
+                        <?php if ($_GET['act'] == "detail") { ?>
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->pendidikan_terakhir_text : '' ?>" name="pendidikan_terakhir" readonly>
+                            <?php } else { ?>
+                                <select class="form-control form-control-subject" name="pendidikan_terakhir" id="pendidikan_terakhir" placeholder="" required>
+                                    <?php foreach ($pendidikan_terakhir as $i): ?>
+                                        <option <?= ($i->id==$peserta[0]->pendidikan_terakhir)?'selected':'' ?> value="<?= $i->id ?>"><?= $i->object_text ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php } ?>
+                            
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Alamat</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->alamat : '' ?>" name="alamat" disabled>
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->alamat : '' ?>" name="alamat" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Sumber Informasi</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->sumber_informasi : '' ?>" name="sumber_informasi" disabled>
+                        <?php if ($_GET['act'] == "detail") { ?>
+                                <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->sumber_informasi_text : '' ?>" name="sosial_media" readonly>
+                            <?php } else { ?>
+                                <select class="form-control form-control-subject" name="sumber_informasi" id="sumber_informasi" placeholder="" required>
+                                    <?php foreach ($sumber_informasi as $i): ?>
+                                        <option value="<?= $i->id ?>" <?= ($i->id == $peserta[0]->sumber_informasi) ? 'selected' : '' ?>><?= $i->object_text ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php } ?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Sosial Media</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" value="<?= isset($peserta) ? $peserta[0]->sosial_media : '' ?>" name="sosial_media" <?= ($_GET['act'] == "detail") ? 'readonly' : 'required' ?>>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Status Peserta</label>
+                        <div class="col-sm-10">
+                            <?php if ($_GET['act'] == "detail") { ?>
+                                <span class="<?= ($peserta[0]->is_verified=="1") ? "btn btn-xs btn-success": "btn btn-xs btn-danger" ?>"><?= ($peserta[0]->is_verified=="1") ? "VERIFIED": "NOT VERIFIED" ?></span>
+                            <?php } else { ?>
+                                <select class="form-control form-control-subject" name="is_verified" id="is_verified" placeholder="" required>
+                                    <option value="1" <?= ($peserta[0]->is_verified=="1") ? 'selected' : '' ?>>Verfied</option>
+                                    <option value="0" <?= ($peserta[0]->is_verified=="0") ? 'selected' : '' ?>>Non-Verified</option>
+                                </select>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php if ($_GET['act'] == "edit") { ?>
+                    <div class="text-right"><br>
+                        <button class="btn btn-primary solid blank" type="submit">SUBMIT</button>
+                    </div>
+                    <?php } ?>
                 </form>
             </div>
         </div>
@@ -111,6 +180,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>Pas Foto</td>
+                            <td>
+                                <img src="<?= (isset($peserta) &&  $peserta[0]->file_pas_foto != '') ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : base_url('assets/img/no-img.png') ?>" class="img-fluid rounded ml-8" style="max-width: 4cm;" alt="Pas Foto">
+                            </td>
+                            <td>
+                                <?php if (isset($peserta)) { ?>
+                                    <button type="button" class="btn btn-primary btn-xs btn-edit"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        data-id="<?= (isset($peserta)) ? $peserta[0]->id : '' ?>"
+                                        data-nik="<?= (isset($peserta)) ? $peserta[0]->nik : '' ?>"
+                                        data-filetype="pas_foto">
+                                        EDIT
+                                    </button>
+                                <?php } ?>
+                            </td>
+                        </tr>
                         <tr>
                             <td>Kartu Tanda Penduduk</td>
                             <td>
@@ -306,52 +393,58 @@
                         <input type="hidden" class="form-control" name="id" id="id" readonly>
                         <input type="hidden" class="form-control" name="file_type" id="file_type" readonly>
                         <input type="hidden" class="form-control" name="nik" id="nik" readonly>
+                        <div class="form-group form-modal div-pas_foto row">
+                            <label class="col-sm-2 col-form-label">Pas Foto</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="file_pas_foto" accept=".jpg, .jpeg, .png">
+                            </div>
+                        </div>
                         <div class="form-group form-modal div-ktp row">
                             <label class="col-sm-2 col-form-label">File KTP</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_ktp">
+                                <input type="file" name="file_ktp" accept=".jpg, .jpeg, .png, .pdf">
                             </div>
                         </div>
                         <div class="form-group form-modal div-kk row">
                             <label class="col-sm-2 col-form-label">File KK</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_kk">
+                                <input type="file" name="file_kk" accept="application/pdf">
                             </div>
                         </div>
                         <div class="form-group form-modal div-ijazah row">
                             <label class="col-sm-2 col-form-label">Ijazah Terakhir</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_ijazah_terakhir" required>
+                                <input type="file" name="file_ijazah_terakhir" accept="application/pdf">
                             </div>
                         </div>
                         <div class="form-group form-modal div-cv row">
                             <label class="col-sm-2 col-form-label">File CV</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_cv" required>
+                                <input type="file" name="file_cv" accept="application/pdf">
                             </div>
                         </div>
                         <div class="form-group form-modal div-skck row">
                             <label class="col-sm-2 col-form-label">File SKCK</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_skck" required>
+                                <input type="file" name="file_skck" accept="application/pdf">
                             </div>
                         </div>
                         <div class="form-group form-modal div-npwp file-npwp row">
                             <label class="col-sm-2 col-form-label">File NPWP</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_npwp" required>
+                                <input type="file" name="file_npwp" accept="application/pdf">
                             </div>
                         </div>
                         <div class="form-group form-modal div-kis file-kis row">
                             <label class="col-sm-2 col-form-label">File KIS</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_kis" required>
+                                <input type="file" name="file_kis" accept="application/pdf">
                             </div>
                         </div>
                         <div class="form-group form-modal div-bpjs file-bpjs row">
                             <label class="col-sm-2 col-form-label">File BPJS</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file_bpjs" required>
+                                <input type="file" name="file_bpjs" accept="application/pdf">
                             </div>
                         </div>
                         <hr>

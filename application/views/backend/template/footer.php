@@ -149,15 +149,7 @@
                     "text": '<span class="fa fa-file-excel-o"> Excel</span>',
                     "className": 'btn btn-success',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                    }
-                },
-                {
-                    "extend": 'print',
-                    "text": '<span class="fa fa-print"> Print</span>',
-                    "className": 'btn btn-warning',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13,14,15,16,17]
                     }
                 }
             ]

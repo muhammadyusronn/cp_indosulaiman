@@ -362,7 +362,7 @@
                 </div>
                 <div class="ts-facts-content">
                   <h2 class="ts-facts-num">
-                    <span class="counterUp" data-count="999">0</span>
+                    <span class="counterUp" data-count="100">0</span>
                   </h2>
                   <h3 class="ts-facts-title">MITRA KAMI</h3>
                 </div>
@@ -379,7 +379,7 @@
                 </div>
                 <div class="ts-facts-content">
                   <h2 class="ts-facts-num">
-                    <span class="counterUp" data-count="44">0</span>
+                    <span class="counterUp" data-count="300">0</span>
                   </h2>
                   <h3 class="ts-facts-title">Total Pengunjung</h3>
                 </div>
