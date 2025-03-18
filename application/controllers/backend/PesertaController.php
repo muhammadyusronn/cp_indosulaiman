@@ -204,6 +204,62 @@ class PesertaController extends MY_Controller
         $act = $this->POST('file_type');
         $nik = $this->POST('nik');
         $arr = [];
+        echo $act;
+
+        if($act=="pas_foto" && empty($_FILES['file_pas_foto']['name'])){
+            $this->flashmsg('File Pas Foto : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="ktp" && empty($_FILES['file_ktp']['name'])){
+            $this->flashmsg('File KTP : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="kk" && empty($_FILES['file_kk']['name'])){
+            $this->flashmsg('File KK : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="ijazah" && empty($_FILES['file_ijazah_terakhir']['name'])){
+            $this->flashmsg('File Ijazah : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="cv" && empty($_FILES['file_cv']['name'])){
+            $this->flashmsg('File CV : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="skck" && empty($_FILES['file_skck']['name'])){
+            $this->flashmsg('File SKCK : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="npwp" && empty($_FILES['file_npwp']['name'])){
+            $this->flashmsg('File NPWP : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="kis" && empty($_FILES['file_kis']['name'])){
+            $this->flashmsg('File KIS : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+
+        if($act=="bpjs" && empty($_FILES['file_bpjs']['name'])){
+            $this->flashmsg('File BPJS : Silahkan upload file!','danger');
+            redirect('peserta/detail?act=detail&id=' . $id);
+            exit; 
+        }
+        exit;
 
         // Check if a file is selected
         if (!empty($_FILES['file_pas_foto']['name'])) {
