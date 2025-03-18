@@ -51,9 +51,10 @@ class MY_Controller extends CI_Controller
         $config['smtp_user'] = 'rekrutmen@indosulaimanmakmur.com';  // Your domain email
         $config['smtp_pass'] = 'Asklzxnm1290!@#';        // Use App Password if needed
         $config['smtp_port'] = 587;                   // 465 for SSL, 587 for TLS
-        $config['mailtype'] = 'html';                 // Use 'text' for plain text emails
-        $config['charset'] = 'utf-8';
-        $config['newline'] = "\r\n";
+        $config['mailtype'] = 'html'; // Ensure email is sent as HTML
+        $config['charset'] = 'utf-8'; // Use UTF-8 encoding
+        $config['newline'] = "\r\n"; // Required for some SMTP servers
+        $config['crlf'] = "\r\n"; // Ensures proper line breaks
         $config['wordwrap'] = TRUE;
         $config['smtp_crypto'] = 'tls'; // Gunakan 'ssl' jika port 465
         $config['smtp_crypto'] = ''; // Coba kosongkan jika tetap error
@@ -66,7 +67,8 @@ class MY_Controller extends CI_Controller
         $config['smtp_ssl_verify_host'] = false;
         $this->load->library('email', $config);
         $this->email->initialize($config);
-
+        $this->email->set_newline("\r\n");
+        $this->email->set_crlf("\r\n");
         $this->email->from('rekrutmen@indosulaimanmakmur.com');
         $this->email->to($to);
         $this->email->subject($subject);
@@ -83,7 +85,7 @@ class MY_Controller extends CI_Controller
     public function do_upload($input_field = "", $directory = "", $allowed_types = '', $file_size = 2048, $encrypted_name = TRUE)
     {
         // Define upload directory path
-        $path = './uploads/'.$directory;
+        $path = './uploads/' . $directory;
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }

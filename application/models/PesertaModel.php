@@ -16,28 +16,28 @@ class PesertaModel extends MY_Model
 
     public function get_data_peserta()
     {
-        $this->db->select('pst.*, obSI.object_text as sumber_informasi, obPT.object_text as pendidikan_terakhir');
+        $this->db->select('pst.*, obSI.object_text as sumber_informasi_text, obPT.object_text as pendidikan_terakhir_text, obA.object_text as agama_text');
         $this->db->from('peserta pst');
         $this->db->join('object obSI', 'obSI.id = pst.sumber_informasi', 'inner');
         $this->db->join('object obPT', 'obPT.id = pst.pendidikan_terakhir', 'inner');
+        $this->db->join('object obA', 'obA.id = pst.agama', 'left outer');
 
         $query = $this->db->get();
-        $result = $query->result(); // Fetch as an array of objects
-
+        $result = $query->result(); 
         return $result; // Return or use the result
 
     }
 
     public function get_data_peserta_by_id($id)
     {
-        $this->db->select('pst.*, obSI.object_text as sumber_informasi, obPT.object_text as pendidikan_terakhir');
+        $this->db->select('pst.*, obSI.object_text as sumber_informasi_text, obPT.object_text as pendidikan_terakhir_text, obA.object_text as agama_text');
         $this->db->from('peserta pst');
         $this->db->join('object obSI', 'obSI.id = pst.sumber_informasi', 'inner');
         $this->db->join('object obPT', 'obPT.id = pst.pendidikan_terakhir', 'inner');
+        $this->db->join('object obA', 'obA.id = pst.agama', 'left outer');
         $this->db->where('pst.id='.$id);
         $query = $this->db->get();
         $result = $query->result(); // Fetch as an array of objects
-        // var_dump($result);exit;
         return $result; // Return or use the result
 
     }

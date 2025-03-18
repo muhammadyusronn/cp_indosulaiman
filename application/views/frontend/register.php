@@ -27,7 +27,7 @@
                 <!-- contact form activation doc: https://docs.themefisher.com/constra/contact-form/ -->
                 <form id="contact-form" action="<?= base_url('register') ?>" method="post" role="form" enctype="multipart/form-data">
                     <div class="error-container"></div>
-                    <div class="alert alert-info">Mohon lengkali dengan data yang valid <br/> Catatan : <br/>
+                    <div class="alert alert-info">Mohon lengkapi dengan data yang valid <br/> Catatan : <br/>
                     <span class="text-danger">*</span> Wajib di input</div>
                     <?php echo $this->session->flashdata('msg'); ?>
                     <div class="row">

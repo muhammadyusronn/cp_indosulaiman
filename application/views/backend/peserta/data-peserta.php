@@ -41,6 +41,8 @@
                                 <th>Foto</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Agama</th>
                                 <th>Email</th>
                                 <th>Nomor Handphone</th>
                                 <th>Tempat Lahir</th>
@@ -50,6 +52,8 @@
                                 <th>Pendidikan Terakhir</th>
                                 <th>Sumber Informasi</th>
                                 <th>Alamat</th>
+                                <th>Sosial Media</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -61,25 +65,33 @@
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><?= $i->registered_at ?></td>
-                                    <td><img src="<?= (isset($peserta) &&  $peserta[0]->file_pas_foto!='') ? base_url('uploads/peserta/' . $peserta[0]->nik . '/' . $peserta[0]->file_pas_foto) : base_url('assets/img/no-img.png') ?>" class="img-fluid rounded" alt="Pas Foto"></td>
+                                    <td><img src="<?= (isset($peserta) &&  $i->file_pas_foto!='') ? base_url('uploads/peserta/' . $i->nik . '/' . $i->file_pas_foto) : base_url('assets/img/no-img.png') ?>" class="img-fluid rounded" alt="Pas Foto"></td>
                                     <td><?= $i->nik ?></td>
                                     <td><?= $i->nama ?></td>
+                                    <td><?= $i->jenis_kelamin ?></td>
+                                    <td><?= $i->agama_text ?></td>
                                     <td><?= $i->email ?></td>
                                     <td><?= $i->no_hp ?></td>
                                     <td><?= $i->tempat_lahir ?></td>
                                     <td><?= $i->tanggal_lahir ?></td>
                                     <td><?= $i->usia ?></td>
                                     <td><?= $i->tinggi_badan ?></td>
-                                    <td><?= $i->pendidikan_terakhir ?></td>
-                                    <td><?= $i->sumber_informasi ?></td>
+                                    <td><?= $i->pendidikan_terakhir_text ?></td>
+                                    <td><?= $i->sumber_informasi_text ?></td>
                                     <td><?= $i->alamat ?></td>
+                                    <td><?= $i->sosial_media ?></td>
+                                    <td>
+                                        <span class="<?= ($i->is_verified=="1") ? "btn btn-xs btn-success": "btn btn-xs btn-danger" ?>"><?= ($i->is_verified=="1") ? "VERIFIED": "NOT VERIFIED" ?></span>
+                                    </td>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-info btn-xs dropdown-toggle" title="ACTION" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-list"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="<?= base_url('peserta/detail?act=detail&id='.$i->id) ?>" target="_blank">DETAIL</a>
+                                            <a class="dropdown-item" href="<?= base_url('peserta/detail?act=detail&id='.$i->id) ?>">DETAIL</a>
+                                            <!-- <a class="dropdown-item" href="<?= base_url('peserta/detail?act=edit&id='.$i->id) ?>">EDIT</a>
+                                            <a class="dropdown-item" href="<?= base_url('peserta/resendemail?nama='.$i->nama."&nik=".$i->nik."&email=".$i->email) ?>">RESEND EMAIL</a> -->
                                             <a class="dropdown-item" href="<?= base_url('peserta/hapus?id='.$i->id) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini? Data yang dihapus tidak bisa dibatalkan')">HAPUS</a>
                                                 <a class="dropdown-item" href="https://wa.me/<?= $i->no_hp; ?>" target="_blank">CHAT PESERTA</a>
                                             </div>
@@ -90,11 +102,13 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>No</th>
+                            <th>No</th>
                                 <th>Register</th>
                                 <th>Foto</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Agama</th>
                                 <th>Email</th>
                                 <th>Nomor Handphone</th>
                                 <th>Tempat Lahir</th>
@@ -104,7 +118,9 @@
                                 <th>Pendidikan Terakhir</th>
                                 <th>Sumber Informasi</th>
                                 <th>Alamat</th>
-                                <th>aksi</th>
+                                <th>Sosial Media</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </tfoot>
                     </table>
